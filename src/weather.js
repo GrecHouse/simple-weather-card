@@ -49,6 +49,10 @@ const ICONS_NIGHT = {
   "lightning-rainy": storm_night,
 }
 
+const PM_GRADE_KO = {
+  "1":"최고", "2":"좋음", "3":"양호", "4":"보통", "5":"나쁨", "6":"상당히나쁨", "7":"매우나쁨", "8":"최악", "0":"알수없음"
+}
+
 const DIRECTION = [
   "N",
   "NNE",
@@ -141,6 +145,58 @@ export default class WeatherEntity {
     return ICONS[icon];
   }
 
+  get pm25gradeNo() {
+    return this.getPmGradeNo("pm25", this.pm25) || "0";
+  }
+
+  get pm10gradeNo() {
+    return this.getPmGradeNo("pm10", this.pm10) || "0";
+  }
+
+  get pm25grade() {
+    return PM_GRADE_KO[this.pm25gradeNo];
+  }
+
+  get pm10grade() {
+    return PM_GRADE_KO[this.pm10gradeNo];
+  }
+
+  get pm25() {
+    return String(Number(this.hass.states['sensor.airkorea_pm25'].state)) || '';
+  }
+
+  get pm10() {
+    return String(Number(this.hass.states['sensor.airkorea_pm10'].state)) || '';
+  }
+
+  getPmGradeNo(type, nv) {
+    let no = "0";
+    let grade = {"1":8, "2":15, "3":20, "4":25, "5":37, "6":50, "7":75, "8":1000};
+    if ( type == "pm10" ) {
+      grade = {"1":15, "2":30, "3":40, "4":50, "5":75, "6":100, "7":150, "8":1000};
+    }
+
+    if ( nv <= grade["1"] ){
+      no = "1";
+    } else if ( nv <= grade["2"] ){
+      no = "2";
+    } else if ( nv <= grade["3"] ){
+      no = "3";
+    } else if ( nv <= grade["4"] ){
+      no = "4";
+    } else if ( nv <= grade["5"] ){
+      no = "5";
+    } else if ( nv <= grade["6"] ){
+      no = "6";
+    } else if ( nv <= grade["7"] ){
+      no = "7";
+    } else if ( nv <= grade["8"] ){
+      no = "8";
+    }
+
+    return no;
+  }
+  
   toLocale(string, fallback = 'unknown') {
     const lang = this.hass.selectedLanguage || this.hass.language;
     const resources = this.hass.resources[lang];
