@@ -133,6 +133,9 @@ class SimpleWeatherCard extends LitElement {
           <span class="weather__info__state">
             ${this.renderAttr('state', false)}
           </span>
+          <span>
+            ${this.renderDustInfo()}
+          </span>
         </div>
         <div class="weather__info weather__info--add">
           ${this.renderInfoRow(this.config.primary_info)}
@@ -195,6 +198,13 @@ class SimpleWeatherCard extends LitElement {
     return html`
       ${state}
       ${uom ? this.getUnit(unit) : ''}
+    `;
+  }
+
+  renderDustInfo(){
+    return html`
+      초미세 ${this.weather.pm25grade} <span class="weather__dust weather__dust_g${this.weather.pm25gradeNo}">${this.weather.pm25}</span>
+      미세 ${this.weather.pm10grade} <span class="weather__dust weather__dust_g${this.weather.pm10gradeNo}">${this.weather.pm10}</span>
     `;
   }
 
