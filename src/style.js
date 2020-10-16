@@ -70,11 +70,13 @@ function getStyles(css) {
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    .weather__dust {
+    .weather__info__dust {
       font-size: 0.8em;
+    }
+    .weather__dust {
       margin-left: 2px;
-      margin-right: 4px;
-      padding: 1px 2px;
+      padding: 0 2px;
+      line-height: 14px;
       border-radius: 3px;
       color: #fff;
     }
