@@ -70,6 +70,41 @@ function getStyles(css) {
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+    .weather__dust {
+      font-size: 0.8em;
+      margin-left: 2px;
+      margin-right: 4px;
+      padding: 1px 2px;
+      border-radius: 3px;
+      color: #fff;
+    }
+    .weather__dust_g1 {
+      background-color: #2876bc;
+    }
+    .weather__dust_g2 {
+      background-color: #239ad5;
+    }
+    .weather__dust_g3 {
+      background-color: #0caec3;
+    }
+    .weather__dust_g4 {
+      background-color: #319141;
+    }
+    .weather__dust_g5 {
+      background-color: #f68e18;
+    }
+    .weather__dust_g6 {
+      background-color: #e84c20;
+    }
+    .weather__dust_g7 {
+      background-color: #d62a2c;
+    }
+    .weather__dust_g8 {
+      background-color: #4e342e;
+    }
+    .weather__dust_g0 {
+      display: none;
+    }
   `;
 }
 
